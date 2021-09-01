@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import PicturesController from '@controllers/pictures.controller';
-import { CreatePictureDto } from '@dtos/pictures.dto';
 import { Routes } from '@interfaces/routes.interface';
 
 class PicturesRoute implements Routes {
