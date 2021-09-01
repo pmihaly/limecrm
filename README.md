@@ -1,0 +1,1 @@
+MongoDB indítása háttérben: `/usr/bin/mongod --quiet --config /etc/mongodb.conf`
