@@ -10,7 +10,7 @@ afterAll(async () => {
 
 describe('Testing Pictures', () => {
   describe('[GET] /pictures', () => {
-    it('response fineAll Pictures', async => {
+    it('response findAll Pictures', async () => {
       const picturesRoute = new PicturesRoute();
       const pictures = picturesRoute.picturesController.pictureService.pictures;
 
@@ -45,7 +45,7 @@ describe('Testing Pictures', () => {
   });
 
   describe('[GET] /pictures/:id', () => {
-    it('response findOne Picture', async => {
+    it('response findOne Picture', async () => {
       const pictureId = '612fb1677783c8177675ae53';
 
       const picturesRoute = new PicturesRoute();
@@ -66,7 +66,7 @@ describe('Testing Pictures', () => {
   });
 
   describe('[POST] /pictures', () => {
-    it('response Create Picture', async => {
+    it('response Create Picture', async () => {
       const pictureData: CreatePictureDto = {
         description: '2134234',
         filename: 'lkj',
@@ -93,7 +93,7 @@ describe('Testing Pictures', () => {
   });
 
   describe('[PUT] /pictures/:id', () => {
-    it('response Update Picture', async => {
+    it('response Update Picture', async () => {
       const pictureId = '612fb1677783c8177675ae53';
       const pictureData: CreatePictureDto = {
         description: '2134234',
@@ -129,7 +129,7 @@ describe('Testing Pictures', () => {
     });
 
     describe('[DELETE] /pictures/:id', () => {
-      it('response Delete Picture', async => {
+      it('response Delete Picture', async () => {
         const pictureId = '60706478aad6c9ad19a31c84';
 
         const picturesRoute = new PicturesRoute();
