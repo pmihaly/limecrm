@@ -28,7 +28,7 @@ jobs:
       - name: 🧰 Setup Node.js environment
         uses: actions/setup-node@v2.4.0
         
-      - name: 📁 Make uploads directory
+      - name: 📁 Create uploads directory
         run: mkdir uploads
         
       - name: 📦 Install dependencies
@@ -36,3 +36,12 @@ jobs:
         
       - name: 🚨 Test server
         run: npm run test
+        
+      - name: 🔑 Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          
+      - name: ♻ Recreate containers
+        run: ssh ${{ secrets.SSH_USER_AT_HOST }} "cd /var/www/limecrm && git pull && docker-compose up --force-recreate -d"
