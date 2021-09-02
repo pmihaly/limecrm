@@ -30,6 +30,7 @@ class PicturesController {
   public createPicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pictureData: CreatePictureDto = req.body;
+      pictureData.filename = req.file.filename;
       const createPictureData: Picture = await this.pictureService.createPicture(pictureData);
 
       res.status(201).json({ data: createPictureData, message: 'created' });

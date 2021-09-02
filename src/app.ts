@@ -31,6 +31,7 @@ class App {
     this.initializeRoutes(routes);
     this.initializeSwagger();
     this.initializeErrorHandling();
+    this.serveStatic();
   }
 
   public listen() {
@@ -89,6 +90,10 @@ class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  private serveStatic() {
+    this.app.use(express.static('uploads'));
   }
 }
 

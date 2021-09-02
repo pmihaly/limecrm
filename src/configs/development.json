@@ -13,5 +13,6 @@
     "cors": {
         "origin": true,
         "credentials": true
-    }
+    },
+    "uploads": "../../uploads"
 }
