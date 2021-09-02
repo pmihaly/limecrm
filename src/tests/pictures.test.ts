@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import App from '@/app';
-import { CreatePictureDto } from '@dtos/pictures.dto';
 import PicturesRoute from '@routes/pictures.route';
+import path from 'path';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -66,14 +66,7 @@ describe('Testing Pictures', () => {
   });
 
   describe('[POST] /pictures', () => {
-    it('response Create Picture', async () => {
-      const pictureData: CreatePictureDto = {
-        description: '2134234',
-        filename: 'lkj',
-        uploadDate: '234234',
-        uploaderIp: '12312312',
-      };
-
+    it('response Create Picture', () => {
       const picturesRoute = new PicturesRoute();
       const pictures = picturesRoute.picturesController.pictureService.pictures;
 
@@ -88,16 +81,21 @@ describe('Testing Pictures', () => {
 
       (mongoose as any).connect = jest.fn();
       const app = new App([picturesRoute]);
-      return request(app.getServer()).post(`${picturesRoute.path}`).send(pictureData).expect(201);
+      return request(app.getServer())
+        .post(`${picturesRoute.path}`)
+        .field('description', '2134234')
+        .field('uploadDate', '234234')
+        .field('uploaderIp', '123123')
+        .attach('picture', path.resolve(__dirname, './fixtures/picture.jpg'))
+        .expect(201);
     });
   });
 
   describe('[PUT] /pictures/:id', () => {
-    it('response Update Picture', async () => {
+    it('response Update Picture', () => {
       const pictureId = '612fb1677783c8177675ae53';
-      const pictureData: CreatePictureDto = {
+      const pictureData = {
         description: '2134234',
-        filename: 'lkj',
         uploadDate: '234234',
         uploaderIp: '12312312',
       };
@@ -105,48 +103,49 @@ describe('Testing Pictures', () => {
       const picturesRoute = new PicturesRoute();
       const pictures = picturesRoute.picturesController.pictureService.pictures;
 
-      if (pictureData.filename) {
+      if (pictureData.description) {
         pictures.findOne = jest.fn().mockReturnValue({
-          _id: '612fb1677783c8177675ae53',
           description: '2134234',
-          filename: 'lkj',
           uploadDate: '234234',
           uploaderIp: '12312312',
         });
 
         pictures.findByIdAndUpdate = jest.fn().mockReturnValue({
-          _id: '612fb1677783c8177675ae53',
-          description: '2134234',
-          filename: 'lkj',
+          description: '2134234 (updated)',
           uploadDate: '234234',
           uploaderIp: '12312312',
         });
 
         (mongoose as any).connect = jest.fn();
         const app = new App([picturesRoute]);
-        return request(app.getServer()).put(`${picturesRoute.path}/${pictureId}`).send(pictureData);
+        return request(app.getServer())
+          .put(`${picturesRoute.path}/${pictureId}`)
+          .field('description', '2134234')
+          .field('uploadDate', '234234')
+          .field('uploaderIp', '123123')
+          .attach('picture', path.resolve(__dirname, './fixtures/picture.jpg'));
       }
     });
+  });
 
-    describe('[DELETE] /pictures/:id', () => {
-      it('response Delete Picture', async () => {
-        const pictureId = '60706478aad6c9ad19a31c84';
+  describe('[DELETE] /pictures/:id', () => {
+    it('response Delete Picture', async () => {
+      const pictureId = '60706478aad6c9ad19a31c84';
 
-        const picturesRoute = new PicturesRoute();
-        const pictures = picturesRoute.picturesController.pictureService.pictures;
+      const picturesRoute = new PicturesRoute();
+      const pictures = picturesRoute.picturesController.pictureService.pictures;
 
-        pictures.findByIdAndDelete = jest.fn().mockReturnValue({
-          _id: '612fb1677783c8177675ae53',
-          description: '2134234',
-          filename: 'lkj',
-          uploadDate: '234234',
-          uploaderIp: '12312312',
-        });
-
-        (mongoose as any).connect = jest.fn();
-        const app = new App([picturesRoute]);
-        return request(app.getServer()).delete(`${picturesRoute.path}/${pictureId}`).expect(200);
+      pictures.findByIdAndDelete = jest.fn().mockReturnValue({
+        _id: '612fb1677783c8177675ae53',
+        description: '2134234',
+        filename: 'lkj',
+        uploadDate: '234234',
+        uploaderIp: '12312312',
       });
+
+      (mongoose as any).connect = jest.fn();
+      const app = new App([picturesRoute]);
+      return request(app.getServer()).delete(`${picturesRoute.path}/${pictureId}`).expect(200);
     });
   });
 });
