@@ -120,10 +120,11 @@ describe('Testing Pictures', () => {
         const app = new App([picturesRoute]);
         return request(app.getServer())
           .put(`${picturesRoute.path}/${pictureId}`)
-          .field('description', '2134234')
+          .field('description', '2134234 (updated)')
           .field('uploadDate', '234234')
           .field('uploaderIp', '123123')
-          .attach('picture', path.resolve(__dirname, './fixtures/picture.jpg'));
+          .attach('picture', path.resolve(__dirname, './fixtures/picture.jpg'))
+          .expect(200);
       }
     });
   });

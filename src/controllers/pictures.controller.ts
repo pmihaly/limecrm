@@ -92,6 +92,8 @@ class PicturesController {
     try {
       const pictureId: string = req.params.id;
 
+      console.log(req.file);
+
       if (!req.file) {
         res.status(400).json({ message: "'picture': Picture needed" });
       }

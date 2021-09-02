@@ -21,7 +21,7 @@ class PicturesRoute implements Routes {
     this.router.get(`${this.path}`, this.picturesController.getPictures);
     this.router.get(`${this.path}/:id`, this.picturesController.getPictureById);
     this.router.post(`${this.path}`, this.upload.single('picture'), this.picturesController.createPicture);
-    this.router.put(`${this.path}/:id`, this.picturesController.updatePicture);
+    this.router.put(`${this.path}/:id`, this.upload.single('picture'), this.picturesController.updatePicture);
     this.router.delete(`${this.path}/:id`, this.picturesController.deletePicture);
   }
 
