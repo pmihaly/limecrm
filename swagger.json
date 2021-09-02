@@ -1,231 +1,231 @@
 {
-    "openapi": "3.0.1",
-    "servers": [
-      {
-        "url": "/"
-      }
-    ],
-    "tags": [
-      {
-        "name": "pictures",
-        "description": "pictures API"
-      }
-    ],
-    "paths": {
-      "/pictures": {
-        "get": {
-          "tags": [
-            "pictures"
-          ],
-          "summary": "Find All Pictures",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {}
-            },
-            "500": {
-              "description": "Server Error",
-              "content": {}
-            }
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "pictures",
+      "description": "pictures API"
+    }
+  ],
+  "paths": {
+    "/pictures": {
+      "get": {
+        "tags": [
+          "pictures"
+        ],
+        "summary": "Find All Pictures",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {}
           }
-        },
-        "post": {
-          "tags": [
-            "pictures"
-          ],
-          "summary": "Add Picture",
-          "requestBody": {
-            "description": "Picture data",
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "uploadDate": {
-                      "type": "string",
-                      "description": "picture upload datetime"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "picture short description"
-                    },
-                    "picture": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  }
-                }
-              }
-            },
-            "required": true
-          },
-          "responses": {
-            "201": {
-              "description": "Created",
-              "content": {}
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {}
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {}
-            },
-            "500": {
-              "description": "Server Error",
-              "content": {}
-            }
-          },
-          "x-codegen-request-body-name": "body"
         }
       },
-      "/pictures/{pictureId}": {
-        "get": {
-          "parameters": [
-            {
-              "name": "pictureId",
-              "in": "path",
-              "required": true,
+      "post": {
+        "tags": [
+          "pictures"
+        ],
+        "summary": "Add Picture",
+        "requestBody": {
+          "description": "Picture data",
+          "content": {
+            "multipart/form-data": {
               "schema": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": 1
-              }
-            }
-          ],
-          "tags": [
-            "pictures"
-          ],
-          "summary": "Find Picture By Id",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {}
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {}
-            },
-            "500": {
-              "description": "Server Error",
-              "content": {}
-            }
-          }
-        },
-        "put": {
-          "parameters": [
-            {
-              "name": "pictureId",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": 1
-              }
-            }
-          ],
-          "tags": [
-            "pictures"
-          ],
-          "summary": "Update Picture By Id",
-          "requestBody": {
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "required": [
-                    "picture"
-                  ],
-                  "properties": {
-                    "picture": {
-                      "type": "string",
-                      "description": "Picture file",
-                      "format": "binary"
-                    }
+                "type": "object",
+                "properties": {
+                  "uploadDate": {
+                    "type": "string",
+                    "description": "picture upload datetime"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "picture short description"
+                  },
+                  "picture": {
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {}
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {}
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {}
-            },
-            "500": {
-              "description": "Server Error",
-              "content": {}
             }
           },
-          "x-codegen-request-body-name": "body"
+          "required": true
         },
-        "delete": {
-          "parameters": [
-            {
-              "name": "pictureId",
-              "in": "path",
-              "required": true,
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/pictures/{pictureId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "pictureId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "tags": [
+          "pictures"
+        ],
+        "summary": "Find Picture By Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "pictureId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "tags": [
+          "pictures"
+        ],
+        "summary": "Update Picture By Id",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
               "schema": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": 1
+                "required": [
+                  "picture"
+                ],
+                "properties": {
+                  "picture": {
+                    "type": "string",
+                    "description": "Picture file",
+                    "format": "binary"
+                  }
+                }
               }
             }
-          ],
-          "tags": [
-            "pictures"
-          ],
-          "summary": "Delete Picture By Id",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {}
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {}
-            },
-            "500": {
-              "description": "Server Error",
-              "content": {}
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "pictureId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "minimum": 1
             }
+          }
+        ],
+        "tags": [
+          "pictures"
+        ],
+        "summary": "Delete Picture By Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {}
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "pictures-upload": {
-          "type": "object",
-          "properties": {
-            "uploadDate": {
-              "type": "string",
-              "description": "picture upload datetime"
-            },
-            "description": {
-              "type": "string",
-              "description": "picture short description"
-            },
-            "picture": {
-              "type": "string",
-              "format": "binary"
-            }
-          }
-        }
-      }
-    },
-    "info": {
-      "title": "LimeCRM REST API",
-      "version": "1.0.0"
     }
+  },
+  "components": {
+    "schemas": {
+      "pictures-upload": {
+        "type": "object",
+        "properties": {
+          "uploadDate": {
+            "type": "string",
+            "description": "picture upload datetime"
+          },
+          "description": {
+            "type": "string",
+            "description": "picture short description"
+          },
+          "picture": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "LimeCRM REST API",
+    "version": "1.0.0"
   }
+}
