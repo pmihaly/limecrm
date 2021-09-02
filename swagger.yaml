@@ -20,13 +20,21 @@ paths:
       tags:
       - pictures
       summary: Add Picture
+      consumes:
+      - multipart/form-data
       parameters:
       - name: body
         in: body
-        description: picture Data
+        description: Picture data
         required: true
         schema:
-          $ref: '#/definitions/pictures'
+          $ref: '#/definitions/pictures-upload'
+      - name: picture
+        in: formData
+        type: file
+        content-type: image/*
+        description: Picture file
+        required: true
       responses:
         201:
           description: 'Created'
@@ -68,10 +76,16 @@ paths:
         required: true
       - name: body
         in: body
-        description: picture Data
+        description: Picture data
         required: true
         schema:
-          $ref: '#/definitions/pictures'
+          $ref: '#/definitions/pictures-upload'
+      - name: picture
+        in: formData
+        type: file
+        content-type: image/*
+        description: Picture file
+        required: true
       responses:
         200:
           description: 'OK'
@@ -102,26 +116,30 @@ paths:
 
 # definitions
 definitions:
+  pictures-upload:
+    properties:
+      uploadDate:
+        type: string
+        description: picture upload datetime
+      description:
+        type: string
+        description: picture short description
   pictures:
-    type: object
-    required:
-        - email
-        - password
     properties:
       id:
         description: picture Id
       filename:
         type: string
-        description: picture's filename
+        description: picture filename
       uploaderIp:
         type: string
-        description: picture's uploader's Ip address
+        description: picture uploader's Ip address
       uploadDate:
         type: string
-        description: picture's uploade datetime
+        description: picture upload datetime
       description:
         type: string
-        description: picture's short description
+        description: picture short description
 
 schemes:
  - https
