@@ -131,16 +131,22 @@
         ],
         "summary": "Update Picture By Id",
         "requestBody": {
+          "description": "Picture data",
           "content": {
             "multipart/form-data": {
               "schema": {
-                "required": [
-                  "picture"
-                ],
+                "type": "object",
                 "properties": {
+                  "uploadDate": {
+                    "type": "string",
+                    "description": "picture upload datetime"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "picture short description"
+                  },
                   "picture": {
                     "type": "string",
-                    "description": "Picture file",
                     "format": "binary"
                   }
                 }
