@@ -1,3 +1,10 @@
+/**
+ * Used by middlewares and services to throw errors
+ *
+ * @export
+ * @class HttpException
+ * @extends {Error}
+ */
 export class HttpException extends Error {
   public status: number;
   public message: string;

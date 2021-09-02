@@ -5,7 +5,6 @@ import App from '@/app';
 import IndexRoute from '@routes/index.route';
 import PicturesRoute from '@routes/pictures.route';
 import validateEnv from '@utils/validateEnv';
-import express from 'express';
 
 validateEnv();
 

@@ -3,9 +3,27 @@ import { CreatePictureDto } from '@dtos/pictures.dto';
 import { Picture } from '@interfaces/pictures.interface';
 import pictureService from '@services/pictures.service';
 
+/**
+ * Pictures CRUD, child methods get called from PicturesRoute
+ *
+ * @class PicturesController
+ */
 class PicturesController {
+  /**
+   * Operations with pictures comes from here
+   *
+   * @memberof PicturesController
+   */
   public pictureService = new pictureService();
 
+  /**
+   * Find all pictures
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @memberof PicturesController
+   */
   public getPictures = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllPicturesData: Picture[] = await this.pictureService.findAllPicture();
@@ -16,6 +34,14 @@ class PicturesController {
     }
   };
 
+  /**
+   * Get a specific picture by id
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @memberof PicturesController
+   */
   public getPictureById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pictureId: string = req.params.id;
@@ -27,6 +53,14 @@ class PicturesController {
     }
   };
 
+  /**
+   * Create a new picture, needs picture file to be uploaded in multipart form
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @memberof PicturesController
+   */
   public createPicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
       if (!req.file) {
@@ -46,9 +80,25 @@ class PicturesController {
     }
   };
 
+  /**
+   * Update a picture by id
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @memberof PicturesController
+   */
   public updatePicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pictureId: string = req.params.id;
+
+      if (!req.file) {
+        res.status(400).json({ message: "'picture': Picture needed" });
+      }
+
+      req.body.uploaderIp = req.connection.remoteAddress;
+      req.body.filename = req.file.filename;
+
       const pictureData: CreatePictureDto = req.body;
       const updatePictureData: Picture = await this.pictureService.updatePicture(pictureId, pictureData);
 
@@ -58,6 +108,14 @@ class PicturesController {
     }
   };
 
+  /**
+   * Delete a picture by id
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {NextFunction} next
+   * @memberof PicturesController
+   */
   public deletePicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pictureId: string = req.params.id;
