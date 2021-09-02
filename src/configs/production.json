@@ -1,7 +1,7 @@
 {
     "env": "production",
     "dbConfig": {
-        "host": "localhost",
+        "host": "mongo",
         "database": "mongoose",
         "port": 27017
     },
@@ -13,6 +13,5 @@
     "cors": {
         "origin": "your.domain.com",
         "credentials": true
-    },
-    "uploads": "/var/www/public"
+    }
 }

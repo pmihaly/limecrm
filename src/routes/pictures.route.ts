@@ -28,7 +28,7 @@ class PicturesRoute implements Routes {
   private initializeMulter() {
     const storage = multer.diskStorage({
       destination: (req, file, cb) =>
-        cb(null, process.env.NODE_ENV === 'development' ? path.join(__dirname, config.get('uploads')) : config.get('uploads')),
+        cb(null, process.env.NODE_ENV === 'production' ? process.env.UPLOADS_DIR : path.join(__dirname, config.get('uploads'))),
       filename: (req, file, cb) => cb(null, `${new Date().toISOString()}_${file.originalname}`),
     });
 
