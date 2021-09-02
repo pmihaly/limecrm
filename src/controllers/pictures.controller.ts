@@ -33,8 +33,13 @@ class PicturesController {
         res.status(400).json({ message: "'picture': Picture needed" });
       }
 
+      req.body.uploaderIp = req.connection.remoteAddress;
+      req.body.filename = req.file.filename;
+
       const pictureData: CreatePictureDto = req.body;
-      pictureData.filename = req.file.filename;
+      // pictureData.filename = req.file.filename;
+      // pictureData.uploaderIp = req.connection.remoteAddress;
+
       const createPictureData: Picture = await this.pictureService.createPicture(pictureData);
 
       res.status(201).json({ data: createPictureData, message: 'created' });
