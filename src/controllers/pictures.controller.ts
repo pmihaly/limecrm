@@ -37,8 +37,6 @@ class PicturesController {
       req.body.filename = req.file.filename;
 
       const pictureData: CreatePictureDto = req.body;
-      // pictureData.filename = req.file.filename;
-      // pictureData.uploaderIp = req.connection.remoteAddress;
 
       const createPictureData: Picture = await this.pictureService.createPicture(pictureData);
 
