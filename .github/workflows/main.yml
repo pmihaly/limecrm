@@ -28,6 +28,9 @@ jobs:
       - name: 🧰 Setup Node.js environment
         uses: actions/setup-node@v2.4.0
         
+      - name: 📁 Make uploads directory
+        run: mkdir uploads
+        
       - name: 📦 Install dependencies
         run: npm install
         
