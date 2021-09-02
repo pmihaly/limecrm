@@ -14,6 +14,7 @@ import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import path from 'path';
 
 /**
  * Create the server application, and initialize needed modules
@@ -133,7 +134,7 @@ class App {
    * @memberof App
    */
   private serveStatic() {
-    this.app.use(express.static('uploads'));
+    this.app.use(express.static(process.env.NODE_ENV === 'production' ? process.env.UPLOADS_DIR : path.join(__dirname, config.get('uploads'))));
   }
 }
 
