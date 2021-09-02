@@ -16,6 +16,7 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+      - ./uploads:/var/www/public
     restart: 'unless-stopped'
     networks:
       - backend
