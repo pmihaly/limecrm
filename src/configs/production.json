@@ -13,5 +13,6 @@
     "cors": {
         "origin": "your.domain.com",
         "credentials": true
-    }
+    },
+    "uploads": "/var/www/public"
 }

@@ -3,6 +3,7 @@ import PicturesController from '@controllers/pictures.controller';
 import { Routes } from '@interfaces/routes.interface';
 import multer from 'multer';
 import path from 'path';
+import config from 'config';
 
 class PicturesRoute implements Routes {
   public path = '/pictures';
@@ -26,7 +27,8 @@ class PicturesRoute implements Routes {
 
   private initializeMulter() {
     const storage = multer.diskStorage({
-      destination: (req, file, cb) => cb(null, path.join(__dirname, '../../uploads/')),
+      destination: (req, file, cb) =>
+        cb(null, process.env.NODE_ENV === 'development' ? path.join(__dirname, config.get('uploads')) : config.get('uploads')),
       filename: (req, file, cb) => cb(null, `${new Date().toISOString()}_${file.originalname}`),
     });
 
