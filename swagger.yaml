@@ -1,32 +1,32 @@
 tags:
-- name: users
-  description: users API
+- name: pictures
+  description: pictures API
 
 paths:
-# [GET] users
-  /users:
+# [GET] pictures
+  /pictures:
     get:
       tags:
-      - users
-      summary: Find All Users
+      - pictures
+      summary: Find All Pictures
       responses:
         200:
           description: 'OK'
         500:
           description: 'Server Error'
 
-# [POST] users
+# [POST] pictures
     post:
       tags:
-      - users
-      summary: Add User
+      - pictures
+      summary: Add Picture
       parameters:
       - name: body
         in: body
-        description: user Data
+        description: picture Data
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/pictures'
       responses:
         201:
           description: 'Created'
@@ -37,16 +37,16 @@ paths:
         500:
           description: 'Server Error'
 
-# [GET] users/id
-  /users/{id}:
+# [GET] pictures/id
+  /pictures/{id}:
     get:
       tags:
-      - users
-      summary: Find User By Id
+      - pictures
+      summary: Find Picture By Id
       parameters:
       - name: id
         in: path
-        description: User Id
+        description: Picture Id
         required: true
       responses:
         200:
@@ -56,22 +56,22 @@ paths:
         500:
           description: 'Server Error'
 
-# [PUT] users/id
+# [PUT] pictures/id
     put:
       tags:
-      - users
-      summary: Update User By Id
+      - pictures
+      summary: Update Picture By Id
       parameters:
       - name: id
         in: path
-        description: user Id
+        description: picture Id
         required: true
       - name: body
         in: body
-        description: user Data
+        description: picture Data
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/pictures'
       responses:
         200:
           description: 'OK'
@@ -82,15 +82,15 @@ paths:
         500:
           description: 'Server Error'
 
-# [DELETE] users/id
+# [DELETE] pictures/id
     delete:
       tags:
-      - users
-      summary: Delete User By Id
+      - pictures
+      summary: Delete Picture By Id
       parameters:
       - name: id
         in: path
-        description: user Id
+        description: picture Id
         required: true
       responses:
         200:
@@ -102,20 +102,26 @@ paths:
 
 # definitions
 definitions:
-  users:
+  pictures:
     type: object
     required:
         - email
         - password
     properties:
       id:
-        description: user Id
-      email:
+        description: picture Id
+      filename:
         type: string
-        description: user Email
-      password:
+        description: picture's filename
+      uploaderIp:
         type: string
-        description: user Password
+        description: picture's uploader's Ip address
+      uploadDate:
+        type: string
+        description: picture's uploade datetime
+      description:
+        type: string
+        description: picture's short description
 
 schemes:
  - https
