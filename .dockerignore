@@ -17,11 +17,12 @@ jest.config.js
 Dockerfile
 docker-compose.yml
 
-frontend/
-    build
-    .eslintrc
-    .eslintignore
-    .editorconfig
-    .huskyrc
-    .lintstagedrc.json
-    .prettierrc
+frontend/build
+frontend/node_modules
+frontend/.vscode
+frontend/.eslintrc
+frontend/.eslintignore
+frontend/.editorconfig
+frontend/.huskyrc
+frontend/.lintstagedrc.json
+frontend/.prettierrc
