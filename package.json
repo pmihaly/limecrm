@@ -6,6 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon & npm start --prefix frontend",
     "build": "npm run build:clean && tsc && npx tsc-alias && npm run build --prefix frontend",
     "build:clean": "rm -rf dist frontend/build",
     "test": "jest",
