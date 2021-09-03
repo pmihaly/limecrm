@@ -30,9 +30,12 @@ jobs:
         
       - name: 📁 Create uploads directory
         run: mkdir uploads
+
+      - name: ✈ Skip preflight check
+        run: echo 'SKIP_PREFLIGHT_CHECK=true' > frontend/.env
         
       - name: 📦 Install dependencies
-        run: SKIP_PREFLIGHT_CHECK=true npm install && npm install --prefix frontend
+        run: npm install && npm install --prefix frontend
         
       - name: 🚨 Run tests
         run: npm run test:ci
