@@ -6,8 +6,8 @@
   "license": "ISC",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon",
-    "build": "tsc && npx tsc-alias && cd frontend && npm run build",
+    "build": "npm run build:clean && tsc && npx tsc-alias && npm run build --prefix frontend",
+    "build:clean": "rm -rf dist frontend/build",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
