@@ -8,6 +8,7 @@ WORKDIR /app
 RUN npm install
 
 RUN test -e frontend/.env || echo 'SKIP_PREFLIGHT_CHECK=true' > frontend/.env
+RUN npm install react-scripts --prefix frontend
 RUN npm install --prefix frontend
 
 EXPOSE 3000
