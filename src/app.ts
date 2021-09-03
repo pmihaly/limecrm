@@ -134,7 +134,12 @@ class App {
    * @memberof App
    */
   private serveStatic() {
-    this.app.use(express.static(process.env.NODE_ENV === 'production' ? process.env.UPLOADS_DIR : path.join(__dirname, config.get('uploads'))));
+    if (process.env.NODE_ENV === 'production') {
+      this.app.use(express.static(path.resolve('./') + '/dist/frontend'));
+      this.app.use(express.static(process.env.UPLOADS_DIR));
+    } else {
+      this.app.use(express.static(path.join(__dirname, config.get('uploads'))));
+    }
   }
 }
 
