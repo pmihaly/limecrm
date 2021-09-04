@@ -13,6 +13,9 @@ EXPOSE 3000
 # Production build stage
 FROM common-build-stage as production-build-stage
 
+ENV NODE_ENV production
+
+ENV UPLOADS_DIR /var/www/public
 RUN mkdir -p "$UPLOADS_DIR"
 
 CMD ["npm", "run", "start"]
