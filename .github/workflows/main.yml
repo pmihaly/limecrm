@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,27 +24,28 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: 🧰 Setup Node.js environment
         uses: actions/setup-node@v2.4.0
-        
+
       - name: 📁 Create uploads directory
         run: mkdir uploads
 
       - name: ✈ Skip preflight check
         run: echo 'SKIP_PREFLIGHT_CHECK=true' > frontend/.env
-        
+
       - name: 📦 Install dependencies
         run: npm install && npm install --prefix frontend
-        
+
       - name: 🚨 Run tests
         run: npm run test:ci
-        
-      - name: 🔑 Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          
-      - name: ♻ Recreate containers
-        run: ssh ${{ secrets.SSH_USER_AT_HOST }} "cd /var/www/limecrm && git pull && docker-compose up --force-recreate -d"
+
+      # TODO: Working docker-compose deployment and updating sercrets for new server
+      # - name: 🔑 Install SSH key
+      #   uses: shimataro/ssh-key-action@v2
+      #   with:
+      #     key: ${{ secrets.SSH_KEY }}
+      #     known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      # - name: ♻ Recreate containers
+      #   run: ssh ${{ secrets.SSH_USER_AT_HOST }} "cd /var/www/limecrm && git pull && docker-compose up --force-recreate -d"
