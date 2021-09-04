@@ -114,7 +114,7 @@ export default function Album() {
               </React.Fragment>
             }
           />
-          <Grid container spacing={4}>
+          <Grid container spacing={4} alignItems="flex-start">
             {pictures.map(picture => (
               <Grid item key={picture._id} xs={12} sm={6} md={4}>
                 <Card className={classes.card} onMouseEnter={() => setSelectedPictureId(picture._id)} onMouseLeave={() => setSelectedPictureId(0)}>
