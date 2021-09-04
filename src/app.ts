@@ -138,7 +138,7 @@ class App {
       this.app.use(express.static(path.resolve('./') + '/dist/frontend'));
       this.app.use(express.static(process.env.UPLOADS_DIR));
     } else {
-      this.app.use(express.static(path.join(__dirname, config.get('uploads'))));
+      this.app.use(express.static(path.resolve('./') + config.get('uploads')));
     }
   }
 }
