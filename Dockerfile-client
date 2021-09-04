@@ -1,0 +1,11 @@
+FROM node:14.14.0-alpine3.12
+
+COPY ./frontend ./app/frontend
+
+WORKDIR /app/frontend
+
+RUN echo "HOST=localhost:3000" > .env
+
+RUN npm install
+
+CMD [ "npm", "run", "build" ]
