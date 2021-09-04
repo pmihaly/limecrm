@@ -10,7 +10,7 @@
     "build": "tsc && npx tsc-alias",
     "build:clean": "rm -rf dist frontend/build",
     "test": "jest && npm run test --prefix frontend",
-    "test:ci": "CI=true jest && npm run test:ci --prefix frontend",
+    "test:ci": "CI=true jest",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "deploy:prod": "npm run build && npm run build --prefix frontend && pm2 start ecosystem.config.js --only prod",
