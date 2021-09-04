@@ -66,6 +66,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function fileSize(size: number) {
+  const i: number = Math.floor(Math.log(size) / Math.log(1024));
+  const fixed: any = (size / Math.pow(1024, i)).toFixed(2);
+  return fixed * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+}
+
 export default function Album() {
   const classes = useStyles();
 
@@ -131,7 +137,7 @@ export default function Album() {
                   </a>
                   <CardContent className={classes.cardContent}>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                      {picture.uploaderIp}
+                      {picture.uploaderIp}, {picture.pictureDimensions.width}x{picture.pictureDimensions.height}, {fileSize(picture.filesize)}
                     </Typography>
                     <Typography>{picture.description}</Typography>
                   </CardContent>
