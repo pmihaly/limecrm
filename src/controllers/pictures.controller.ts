@@ -3,6 +3,10 @@ import { CreatePictureDto } from '@dtos/pictures.dto';
 import { Picture } from '@interfaces/pictures.interface';
 import pictureService from '@services/pictures.service';
 
+import sizeOf from 'image-size';
+import { PictureDimensionsInterface } from '@/interfaces/pictureDimensions.interface';
+import { crossOriginResourcePolicy } from 'helmet';
+
 /**
  * Pictures CRUD, child methods get called from PicturesRoute
  *
@@ -67,10 +71,20 @@ class PicturesController {
         res.status(400).json({ message: "'picture': Picture needed" });
       }
 
-      req.body.uploaderIp = req.connection.remoteAddress;
-      req.body.filename = req.file.filename;
+      const { uploadDate, description } = req.body;
+      const { filename, size } = req.file;
+      const { width, height } = await sizeOf(req.file.path);
 
-      const pictureData: CreatePictureDto = req.body;
+      const pictureDimensions: PictureDimensionsInterface = { width, height };
+
+      const pictureData: CreatePictureDto = {
+        filename,
+        filesize: size,
+        pictureDimensions,
+        uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        uploadDate,
+        description,
+      };
 
       const createPictureData: Picture = await this.pictureService.createPicture(pictureData);
 
