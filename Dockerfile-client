@@ -4,6 +4,8 @@ COPY ./frontend ./app/frontend
 
 WORKDIR /app/frontend
 
+RUN echo "HOST=localhost:3000" > .env
+
 RUN npm install
 
 CMD [ "npm", "run", "build" ]

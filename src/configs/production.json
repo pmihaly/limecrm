@@ -1,7 +1,7 @@
 {
   "env": "production",
   "dbConfig": {
-    "host": "localhost",
+    "host": "mongo",
     "database": "mongoose",
     "port": 27017
   },
