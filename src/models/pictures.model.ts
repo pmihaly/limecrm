@@ -7,6 +7,14 @@ const pictureSchema: Schema = new Schema({
     required: true,
     unique: true,
   },
+  filesize: {
+    type: Number,
+    required: true,
+  },
+  pictureDimensions: {
+    type: Object,
+    required: true,
+  },
   uploaderIp: {
     type: String,
     required: true,

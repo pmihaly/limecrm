@@ -1,18 +1,22 @@
-import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import LinkIcon from '@material-ui/icons/Link';
+import CameraIcon from '@material-ui/icons/PhotoCamera';
+import React, { useEffect, useState } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 
 function Copyright() {
   return (
@@ -53,16 +57,36 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     flexGrow: 1,
   },
+  title: {
+    fontSize: 14,
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function fileSize(size: number) {
+  const i: number = Math.floor(Math.log(size) / Math.log(1024));
+  const fixed: any = (size / Math.pow(1024, i)).toFixed(2);
+  return fixed * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+}
 
 export default function Album() {
   const classes = useStyles();
+
+  const [pictures, setPictures] = useState<any[]>([]);
+
+  const [selectedPictureId, setSelectedPictureId] = useState<any>(0);
+
+  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<String>('');
+
+  useEffect(() => {
+    fetch('/pictures')
+      .then(res => res.json())
+      .then(res => setPictures(res.data));
+  }, []);
 
   return (
     <React.Fragment>
@@ -71,75 +95,62 @@ export default function Album() {
         <Toolbar>
           <CameraIcon className={classes.icon} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            LimeCRM
           </Typography>
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Album layout
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so
-              folks don&apos;t simply skip over it entirely.
-            </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>This is a media card. You can use this section to describe the content.</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            message={snackbarMessage}
+            onClose={() => setSnackbarOpen(false)}
+            action={
+              <React.Fragment>
+                <Button color="secondary" size="small" onClick={() => setSnackbarOpen(false)}>
+                  Ok
+                </Button>
+              </React.Fragment>
+            }
+          />
+          <Grid container spacing={4} alignItems="flex-start">
+            {pictures.map(picture => (
+              <Grid item key={picture._id} xs={12} sm={6} md={4}>
+                <Card className={classes.card} onMouseEnter={() => setSelectedPictureId(picture._id)} onMouseLeave={() => setSelectedPictureId(0)}>
+                  <CardHeader
+                    action={
+                      <>
+                        <IconButton
+                          aria-label="copy picture url"
+                          onClick={() => {
+                            navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/${picture.filename}`);
+                            setSnackbarMessage('Kép URL vágólapra másolva');
+                            setSnackbarOpen(true);
+                          }}
+                        >
+                          <LinkIcon />
+                        </IconButton>
+                      </>
+                    }
+                  />
+                  <a href={`${process.env.REACT_APP_API_URL}/${picture.filename}`} target="_blank" rel="noopener noreferrer">
+                    <CardMedia className={classes.cardMedia} image={`/${picture.filename}`} title={picture.filename} />
+                  </a>
+                  {picture._id === selectedPictureId && (
+                    <CardContent className={classes.cardContent}>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {picture.uploaderIp}, {picture.pictureDimensions.width}x{picture.pictureDimensions.height}, {fileSize(picture.filesize)}
+                      </Typography>
+                      <Typography>{picture.description}</Typography>
+                    </CardContent>
+                  )}
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }
