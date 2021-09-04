@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  client:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile-client
+    container_name: client
+    volumes:
+      - ./dist/frontend:/app/build # TODO amit konténeren belül elkészített, rakj a dist mappába
+      - /app/node_modules
+
   server:
     build:
       context: ./
@@ -24,6 +33,9 @@ services:
       - mongo
     depends_on:
       - mongo
+      - client
+
+
   mongo:
     image: mvertes/alpine-mongo
     container_name: mongo
