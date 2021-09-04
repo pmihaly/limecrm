@@ -135,7 +135,7 @@ export default function Album() {
                     }
                   />
                   <a href={`${process.env.REACT_APP_API_URL}/${picture.filename}`} target="_blank" rel="noopener noreferrer">
-                    <CardMedia className={classes.cardMedia} image={`/${picture.filename}`} title="Image title" />
+                    <CardMedia className={classes.cardMedia} image={`/${picture.filename}`} title={picture.filename} />
                   </a>
                   {picture._id === selectedPictureId && (
                     <CardContent className={classes.cardContent}>
