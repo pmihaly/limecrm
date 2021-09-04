@@ -77,6 +77,8 @@ export default function Album() {
 
   const [pictures, setPictures] = useState<any[]>([]);
 
+  const [selectedPictureId, setSelectedPictureId] = useState<any>(0);
+
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<String>('');
 
@@ -115,7 +117,7 @@ export default function Album() {
           <Grid container spacing={4}>
             {pictures.map(picture => (
               <Grid item key={picture._id} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
+                <Card className={classes.card} onMouseEnter={() => setSelectedPictureId(picture._id)} onMouseLeave={() => setSelectedPictureId(0)}>
                   <CardHeader
                     action={
                       <>
@@ -135,30 +137,20 @@ export default function Album() {
                   <a href={`${process.env.REACT_APP_API_URL}/${picture.filename}`} target="_blank" rel="noopener noreferrer">
                     <CardMedia className={classes.cardMedia} image={`/${picture.filename}`} title="Image title" />
                   </a>
-                  <CardContent className={classes.cardContent}>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                      {picture.uploaderIp}, {picture.pictureDimensions.width}x{picture.pictureDimensions.height}, {fileSize(picture.filesize)}
-                    </Typography>
-                    <Typography>{picture.description}</Typography>
-                  </CardContent>
-                  <CardActions></CardActions>
+                  {picture._id === selectedPictureId && (
+                    <CardContent className={classes.cardContent}>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {picture.uploaderIp}, {picture.pictureDimensions.width}x{picture.pictureDimensions.height}, {fileSize(picture.filesize)}
+                      </Typography>
+                      <Typography>{picture.description}</Typography>
+                    </CardContent>
+                  )}
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }
