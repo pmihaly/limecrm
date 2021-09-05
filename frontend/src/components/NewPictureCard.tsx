@@ -4,6 +4,8 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
+import NewPictureDialog from './NewPictureDialog';
+import { useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -30,13 +32,16 @@ export interface INewPictureCardProps {}
 export default function NewPictureCard(props: INewPictureCardProps) {
   const classes = useStyles();
 
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
     <Grid item key={0} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <Button startIcon={<AddIcon />} className={classes.addPictureButton}>
-            Add new picture
+          <Button startIcon={<AddIcon />} className={classes.addPictureButton} onClick={() => setDialogOpen(true)}>
+            Upload a picture
           </Button>
+          <NewPictureDialog open={dialogOpen} onDialogClose={() => setDialogOpen(false)}></NewPictureDialog>
         </CardContent>
       </Card>
     </Grid>
