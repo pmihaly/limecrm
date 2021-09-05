@@ -17,7 +17,7 @@ function fileSize(size: number): string {
 
 export interface IPictureCardProps {
   picture: IPicture;
-  showCopiedSnackbar(): void;
+  onPictureURLCopy(): void;
 }
 
 interface IPicture {
@@ -62,7 +62,7 @@ export default function PictureCard(props: IPictureCardProps) {
                 aria-label="copy picture url"
                 onClick={() => {
                   navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/${props.picture.filename}`);
-                  props.showCopiedSnackbar();
+                  props.onPictureURLCopy();
                 }}
               >
                 <LinkIcon />

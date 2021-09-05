@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import PictureCard from './components/PictureCard';
+import NewPictureCard from './components/NewPictureCard';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -36,9 +37,13 @@ export default function Album() {
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<String>('');
 
-  function showCopiedSnackbar() {
-    setSnackbarMessage('Kép URL vágólapra másolva');
+  function showSnackbar(message: string) {
+    setSnackbarMessage(message);
     setSnackbarOpen(true);
+  }
+
+  function onPictureURLCopy() {
+    showSnackbar('Kép URL vágólapra másolva');
   }
 
   useEffect(() => {
@@ -74,8 +79,9 @@ export default function Album() {
             }
           />
           <Grid container spacing={4} alignItems="flex-start">
+            <NewPictureCard></NewPictureCard>
             {pictures.map(picture => (
-              <PictureCard picture={picture} showCopiedSnackbar={showCopiedSnackbar}></PictureCard>
+              <PictureCard picture={picture} onPictureURLCopy={onPictureURLCopy}></PictureCard>
             ))}
           </Grid>
         </Container>
