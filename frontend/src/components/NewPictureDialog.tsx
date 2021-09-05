@@ -15,10 +15,6 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginTop: '1rem',
   },
-  terms: {
-    color: theme.palette.primary.main,
-    cursor: 'pointer',
-  },
 }));
 
 export interface INewPictureDialogProps {
@@ -34,13 +30,13 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
       <DialogTitle id="form-dialog-title">Uploading picture</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          By uploading an image, you accept our <span className={classes.terms}>Terms</span>
+          By uploading an image, you accept our <a href="/">Terms</a>
         </DialogContentText>
         <TextField autoFocus margin="dense" label="Picture description" rows={4} fullWidth multiline />
         <input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file" />
         <label htmlFor="contained-button-file">
           <Button className={classes.button} variant="contained" color="primary" component="span" startIcon={<PhotoCamera />}>
-            Upload
+            Add image
           </Button>
         </label>
       </DialogContent>
@@ -49,7 +45,7 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
           Cancel
         </Button>
         <Button color="primary" onClick={() => props.onDialogClose()}>
-          Subscribe
+          Upload
         </Button>
       </DialogActions>
     </Dialog>
