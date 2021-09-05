@@ -11,6 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import PictureCard from './components/PictureCard';
 import NewPictureCard from './components/NewPictureCard';
+import { PicturesContext } from './context/PicturesContext';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -53,7 +54,7 @@ export default function Album() {
   }, []);
 
   return (
-    <React.Fragment>
+    <PicturesContext.Provider value={{ pictures, setPictures }}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
@@ -86,6 +87,6 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-    </React.Fragment>
+    </PicturesContext.Provider>
   );
 }

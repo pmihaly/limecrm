@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import LinkIcon from '@material-ui/icons/Link';
 import { useState } from 'react';
+import PictureInterface from '../interfaces/PictureInterface';
 
 function fileSize(size: number): string {
   const i: number = Math.floor(Math.log(size) / Math.log(1024));
@@ -16,18 +17,8 @@ function fileSize(size: number): string {
 }
 
 export interface IPictureCardProps {
-  picture: IPicture;
+  picture: PictureInterface;
   onPictureURLCopy(): void;
-}
-
-interface IPicture {
-  _id: string;
-  description: string;
-  filename: string;
-  filesize: number;
-  pictureDimensions: { width: number; height: number };
-  uploadDate: string;
-  uploaderIp: string;
 }
 
 const useStyles = makeStyles(theme => ({
