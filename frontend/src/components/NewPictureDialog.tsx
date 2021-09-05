@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import { useRef, useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -25,6 +26,11 @@ export interface INewPictureDialogProps {
 export default function NewPictureDialog(props: INewPictureDialogProps) {
   const classes = useStyles();
 
+  const [description, setDescription] = useState<string>('');
+  const [picture, setPicture] = useState<File | null>(null);
+
+  const formRef = useRef<HTMLFormElement | undefined>();
+
   return (
     <Dialog open={props.open} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Uploading picture</DialogTitle>
@@ -32,19 +38,47 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
         <DialogContentText>
           By uploading an image, you accept our <a href="/">Terms</a>
         </DialogContentText>
-        <TextField autoFocus margin="dense" label="Picture description" rows={4} fullWidth multiline />
-        <input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file" />
+        <TextField autoFocus margin="dense" label="Picture description" rows={4} fullWidth multiline onChange={e => setDescription(e.target.value)} />
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="contained-button-file"
+          multiple
+          type="file"
+          onChange={e => {
+            const targetFiles = e.target.files;
+            if (!targetFiles) {
+              return;
+            } else {
+              setPicture(targetFiles[0]);
+            }
+          }}
+        />
         <label htmlFor="contained-button-file">
           <Button className={classes.button} variant="contained" color="primary" component="span" startIcon={<PhotoCamera />}>
             Add image
           </Button>
         </label>
+        <form id="upload_form" ref={formRef as any} encType="multipart/form-data"></form>
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={() => props.onDialogClose()}>
           Cancel
         </Button>
-        <Button color="primary" onClick={() => props.onDialogClose()}>
+        <Button
+          color="primary"
+          onClick={() => {
+            let form = new FormData(formRef.current);
+            form.append('picture', picture as Blob);
+            form.append('description', description);
+            form.append('uploadDate', new Date(Date.now()).toDateString());
+
+            fetch('/pictures', {
+              method: 'POST',
+              body: form,
+            }).then(res => console.log('res of fetch', res));
+          }}
+        >
           Upload
         </Button>
       </DialogActions>
