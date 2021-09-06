@@ -71,7 +71,7 @@ class PicturesController {
         res.status(400).json({ message: "'picture': Picture needed" });
       }
 
-      const { uploadDate, description } = req.body;
+      const { description } = req.body;
       const { filename, size } = req.file;
       const { width, height } = await sizeOf(req.file.path);
 
@@ -82,7 +82,7 @@ class PicturesController {
         filesize: size,
         pictureDimensions,
         uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-        uploadDate,
+        uploadDate: new Date(Date.now()).toISOString(),
         description,
       };
 
@@ -112,10 +112,20 @@ class PicturesController {
         res.status(400).json({ message: "'picture': Picture needed" });
       }
 
-      req.body.uploaderIp = req.connection.remoteAddress;
-      req.body.filename = req.file.filename;
+      const { description } = req.body;
+      const { filename, size } = req.file;
+      const { width, height } = await sizeOf(req.file.path);
 
-      const pictureData: CreatePictureDto = req.body;
+      const pictureDimensions: PictureDimensionsInterface = { width, height };
+
+      const pictureData: CreatePictureDto = {
+        filename,
+        filesize: size,
+        pictureDimensions,
+        uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        uploadDate: new Date(Date.now()).toISOString(),
+        description,
+      };
       const updatePictureData: Picture = await this.pictureService.updatePicture(pictureId, pictureData);
 
       res.status(200).json({ data: updatePictureData, message: 'updated' });

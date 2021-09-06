@@ -72,9 +72,9 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
           color="primary"
           onClick={() => {
             let form = new FormData(formRef.current);
+
             form.append('picture', picture as Blob);
             form.append('description', description);
-            form.append('uploadDate', new Date(Date.now()).toISOString());
 
             fetch('/pictures', {
               method: 'POST',

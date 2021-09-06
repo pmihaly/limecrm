@@ -14,9 +14,7 @@
   "paths": {
     "/pictures": {
       "get": {
-        "tags": [
-          "pictures"
-        ],
+        "tags": ["pictures"],
         "summary": "Find All Pictures",
         "responses": {
           "200": {
@@ -30,9 +28,7 @@
         }
       },
       "post": {
-        "tags": [
-          "pictures"
-        ],
+        "tags": ["pictures"],
         "summary": "Add Picture",
         "requestBody": {
           "description": "Picture data",
@@ -41,10 +37,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "uploadDate": {
-                    "type": "string",
-                    "description": "picture upload datetime"
-                  },
                   "description": {
                     "type": "string",
                     "description": "picture short description"
@@ -94,9 +86,7 @@
             }
           }
         ],
-        "tags": [
-          "pictures"
-        ],
+        "tags": ["pictures"],
         "summary": "Find Picture By Id",
         "responses": {
           "200": {
@@ -126,9 +116,7 @@
             }
           }
         ],
-        "tags": [
-          "pictures"
-        ],
+        "tags": ["pictures"],
         "summary": "Update Picture By Id",
         "requestBody": {
           "description": "Picture data",
@@ -137,10 +125,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "uploadDate": {
-                    "type": "string",
-                    "description": "picture upload datetime"
-                  },
                   "description": {
                     "type": "string",
                     "description": "picture short description"
@@ -188,9 +172,7 @@
             }
           }
         ],
-        "tags": [
-          "pictures"
-        ],
+        "tags": ["pictures"],
         "summary": "Delete Picture By Id",
         "responses": {
           "200": {
@@ -204,27 +186,6 @@
           "500": {
             "description": "Server Error",
             "content": {}
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "pictures-upload": {
-        "type": "object",
-        "properties": {
-          "uploadDate": {
-            "type": "string",
-            "description": "picture upload datetime"
-          },
-          "description": {
-            "type": "string",
-            "description": "picture short description"
-          },
-          "picture": {
-            "type": "string",
-            "format": "binary"
           }
         }
       }
