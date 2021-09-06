@@ -52,7 +52,7 @@ export default function PictureCard(props: IPictureCardProps) {
               <IconButton
                 aria-label="copy picture url"
                 onClick={() => {
-                  navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/${props.picture.filename}`);
+                  navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`);
                   props.onPictureURLCopy();
                 }}
               >
@@ -61,7 +61,7 @@ export default function PictureCard(props: IPictureCardProps) {
             </>
           }
         />
-        <a href={`/${props.picture.filename}`} target="_blank" rel="noopener noreferrer">
+        <a href={`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`} target="_blank" rel="noopener noreferrer">
           <CardMedia className={classes.cardMedia} image={`/${props.picture.filename}`} title={props.picture.filename} />
         </a>
         {cardSelected && (

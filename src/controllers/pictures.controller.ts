@@ -76,12 +76,16 @@ class PicturesController {
 
       const pictureDimensions: PictureDimensionsInterface = { width, height };
 
+      const uploadDate = new Date(Date.now()).toISOString();
+
+      console.log('uploadDate', uploadDate);
+
       const pictureData: CreatePictureDto = {
         filename,
         filesize: size,
         pictureDimensions,
         uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-        uploadDate: new Date(Date.now()).toISOString(),
+        uploadDate,
         description,
       };
 
