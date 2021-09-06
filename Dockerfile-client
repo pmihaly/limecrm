@@ -5,6 +5,7 @@ COPY ./frontend ./app/frontend
 WORKDIR /app/frontend
 
 RUN echo "HOST=localhost:3000" > .env
+RUN echo "REACT_APP_API_URL=https://2389-84-3-31-39.ngrok.io" > .env
 
 RUN npm install
 

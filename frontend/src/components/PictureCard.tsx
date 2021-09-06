@@ -61,7 +61,7 @@ export default function PictureCard(props: IPictureCardProps) {
             </>
           }
         />
-        <a href={`${process.env.REACT_APP_API_URL}/${props.picture.filename}`} target="_blank" rel="noopener noreferrer">
+        <a href={`/${props.picture.filename}`} target="_blank" rel="noopener noreferrer">
           <CardMedia className={classes.cardMedia} image={`/${props.picture.filename}`} title={props.picture.filename} />
         </a>
         {cardSelected && (
