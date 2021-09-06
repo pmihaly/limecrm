@@ -29,6 +29,13 @@ const useStyles = makeStyles(theme => ({
 
 export interface INewPictureCardProps {}
 
+/**
+ * Kép hozzáadása dialógust megynyitó gomb, a kép grid első eleme
+ *
+ * @export
+ * @param {INewPictureCardProps} props
+ * @return {React.Component}
+ */
 export default function NewPictureCard(props: INewPictureCardProps) {
   const classes = useStyles();
 

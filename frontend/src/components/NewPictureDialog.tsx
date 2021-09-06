@@ -24,6 +24,15 @@ export interface INewPictureDialogProps {
   onDialogClose: () => void;
 }
 
+/**
+ * Képfeltöltés dialógus
+ * A képleírásból és a képből álló multipart formot gombnyomásra összeállítja és elküldi a szerverre
+ * Sikeres képfeltöltésnél megváltoztatja a pictures contextet
+ *
+ * @export
+ * @param {INewPictureDialogProps} props
+ * @return {React.Component}
+ */
 export default function NewPictureDialog(props: INewPictureDialogProps) {
   const classes = useStyles();
 

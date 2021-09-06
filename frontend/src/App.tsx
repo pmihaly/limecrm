@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import PictureCard from './components/PictureCard';
 import NewPictureCard from './components/NewPictureCard';
 import { PicturesContext } from './context/PicturesContext';
+import PictureInterface from './interfaces/PictureInterface';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -30,20 +31,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Album() {
+/**
+ * Őskomponens
+ * Statejében tárolódnak a képek, amiket Context api-val kiszolgálunk a gyerekeknek
+ * Tartalmaz egy appbart, a képek gridjét  (aminek első eleme a képfeltöltés gomb)
+ * és egy alapból láthatatlan snackbart, ami kép URL másolás esetén visszajelzést ad a usernek
+ *
+ * @export
+ * @return {React.Component}
+ */
+export default function App() {
   const classes = useStyles();
 
-  const [pictures, setPictures] = useState<any[]>([]);
+  const [pictures, setPictures] = useState<PictureInterface[]>([]);
 
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<String>('');
 
-  function showSnackbar(message: string) {
+  function showSnackbar(message: string): void {
     setSnackbarMessage(message);
     setSnackbarOpen(true);
   }
 
-  function onPictureURLCopy() {
+  function onPictureURLCopy(): void {
     showSnackbar('Kép URL vágólapra másolva');
   }
 

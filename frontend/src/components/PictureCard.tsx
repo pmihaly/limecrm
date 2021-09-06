@@ -7,9 +7,15 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import LinkIcon from '@material-ui/icons/Link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PictureInterface from '../interfaces/PictureInterface';
 
+/**
+ * Emberi szemmel olvasható formába hozza @param {number} size darab bájtot.
+ *
+ * @param {number} size
+ * @return {string}
+ */
 function fileSize(size: number): string {
   const i: number = Math.floor(Math.log(size) / Math.log(1024));
   const fixed: any = (size / Math.pow(1024, i)).toFixed(2);
@@ -38,6 +44,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Egy kép komponense
+ * Felső jobb sarokban link másolás gomb, képre kattintva képmegtekintés, kártyára hover esetén metaadatok megjelenítése
+ *
+ * @export
+ * @param {IPictureCardProps} props
+ * @return {React.Component}
+ */
 export default function PictureCard(props: IPictureCardProps) {
   const classes = useStyles();
 
