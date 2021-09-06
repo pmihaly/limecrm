@@ -19,9 +19,10 @@ LimeCRM egy képmegosztó szolgáltatás.
 - [Production deploy](https://2389-84-3-31-39.ngrok.io)
 
 
+## Funkciók
 * 🐙 Git verziókezelő használata
 	* ✨ Conventional commit mesages
-* 🌐 HTTPS protokoll és REST elvek 
+* 🌐 HTTPS protokoll és REST elvek követése
 * 🪂 Production deployment
 * 📝 Jó minőségű dokumentáció
 	* JsDoc
