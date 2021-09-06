@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { useRef, useState } from 'react';
+import { usePictures } from '../context/PicturesContext';
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -25,6 +26,8 @@ export interface INewPictureDialogProps {
 
 export default function NewPictureDialog(props: INewPictureDialogProps) {
   const classes = useStyles();
+
+  const { pictures, setPictures } = usePictures();
 
   const [description, setDescription] = useState<string>('');
   const [picture, setPicture] = useState<File | null>(null);
@@ -71,12 +74,17 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
             let form = new FormData(formRef.current);
             form.append('picture', picture as Blob);
             form.append('description', description);
-            form.append('uploadDate', new Date(Date.now()).toDateString());
+            form.append('uploadDate', new Date(Date.now()).toISOString());
 
             fetch('/pictures', {
               method: 'POST',
               body: form,
-            }).then(res => console.log('res of fetch', res));
+            })
+              .then(res => res.json())
+              .then(res => {
+                setPictures([res.data, ...pictures]);
+                props.onDialogClose();
+              });
           }}
         >
           Upload
