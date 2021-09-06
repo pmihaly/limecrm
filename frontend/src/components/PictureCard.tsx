@@ -81,8 +81,14 @@ export default function PictureCard(props: IPictureCardProps) {
         {cardSelected && (
           <CardContent className={classes.cardContent}>
             <Typography className={classes.title} color="textSecondary" gutterBottom>
-              {props.picture.uploaderIp}, {props.picture.pictureDimensions.width}x{props.picture.pictureDimensions.height},{' '}
-              {fileSize(props.picture.filesize)}
+              <ul>
+                <li>Uploader Ip: {props.picture.uploaderIp}</li>
+                <li>Upload date: {new Date(props.picture.uploadDate).toLocaleDateString()}</li>
+                <li>
+                  Image res: {props.picture.pictureDimensions.width}x{props.picture.pictureDimensions.height}
+                </li>
+                <li>File size: {fileSize(props.picture.filesize)}</li>
+              </ul>
             </Typography>
             <Typography>{props.picture.description}</Typography>
           </CardContent>
