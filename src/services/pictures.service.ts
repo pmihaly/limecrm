@@ -19,7 +19,7 @@ class PictureService {
    * @memberof PictureService
    */
   public async findAllPicture(): Promise<Picture[]> {
-    const pictures: Picture[] = await this.pictures.find();
+    const pictures: Picture[] = await this.pictures.find().sort([['uploadDate', -1]]);
     return pictures;
   }
 

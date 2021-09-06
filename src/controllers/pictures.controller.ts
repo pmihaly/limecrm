@@ -3,7 +3,6 @@ import { CreatePictureDto } from '@dtos/pictures.dto';
 import { Picture } from '@interfaces/pictures.interface';
 import pictureService from '@services/pictures.service';
 
-// @ts-ignore
 import sizeOf from 'image-size';
 import { PictureDimensionsInterface } from '@/interfaces/pictureDimensions.interface';
 
