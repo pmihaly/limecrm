@@ -29,6 +29,7 @@ services:
     depends_on:
       - mongo
       - client
+    command: sh -c "npm run build && npm run start" # ideális esetben dockerfileban buildeli le
 
   mongo:
     image: mvertes/alpine-mongo

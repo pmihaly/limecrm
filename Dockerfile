@@ -6,7 +6,7 @@ COPY . ./app
 WORKDIR /app
 
 RUN npm install
-RUN npm run build
+# RUN npm run build # valamiért nem készít el semmit a dist/-be, ezért docker-composeban buildeljük le
 
 ENV NODE_ENV production
 
