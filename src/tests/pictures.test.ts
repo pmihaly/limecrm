@@ -14,29 +14,31 @@ describe('Testing Pictures', () => {
       const picturesRoute = new PicturesRoute();
       const pictures = picturesRoute.picturesController.pictureService.pictures;
 
-      pictures.find = jest.fn().mockReturnValue([
-        {
-          _id: '612fb1677783c8177675ae53',
-          description: '2134234',
-          filename: 'lkj',
-          uploadDate: '234234',
-          uploaderIp: '12312312',
-        },
-        {
-          _id: '612fb1677783c8177675ae53',
-          description: '2134234',
-          filename: 'lkj',
-          uploadDate: '234234',
-          uploaderIp: '12312312',
-        },
-        {
-          _id: '612fb1677783c8177675ae53',
-          description: '2134234',
-          filename: 'lkj',
-          uploadDate: '234234',
-          uploaderIp: '12312312',
-        },
-      ]);
+      pictures.find = jest.fn().mockImplementationOnce(() => ({
+        sort: jest.fn().mockResolvedValueOnce([
+          {
+            _id: '612fb1677783c8177675ae53',
+            description: '2134234',
+            filename: 'lkj',
+            uploadDate: '234234',
+            uploaderIp: '12312312',
+          },
+          {
+            _id: '612fb1677783c8177675ae53',
+            description: '2134234',
+            filename: 'lkj',
+            uploadDate: '234234',
+            uploaderIp: '12312312',
+          },
+          {
+            _id: '612fb1677783c8177675ae53',
+            description: '2134234',
+            filename: 'lkj',
+            uploadDate: '234234',
+            uploaderIp: '12312312',
+          },
+        ]),
+      }));
 
       (mongoose as any).connect = jest.fn();
       const app = new App([picturesRoute]);
