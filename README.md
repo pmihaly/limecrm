@@ -6,31 +6,32 @@
 ![Licence Badge](https://img.shields.io/github/license/pmihaly/limecrm?style=for-the-badge) ![Website](https://img.shields.io/website?style=for-the-badge&url=https://2389-84-3-31-39.ngrok.io) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pmihaly/limecrm/CI?style=for-the-badge)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
+
 </p>
 
 ---
 
-
 LimeCRM egy képmegosztó szolgáltatás.
 
 ## Linkek
+
 - [Kanban táblák](https://github.com/pmihaly/limecrm/projects)
 - [Interakatív API doksi](https://2389-84-3-31-39.ngrok.io/api-docs)
 - [Production deploy](https://2389-84-3-31-39.ngrok.io)
 
-
 ## Funkciók
-* 🐙 Git verziókezelő használata
-	* ✨ Conventional commit mesages
-* 🌐 HTTPS protokoll és REST elvek követése
-* 🪂 Production deployment
-* 📝 Jó minőségű dokumentáció
-	* JsDoc
-	* [Interakatív API doksi](https://2389-84-3-31-39.ngrok.io/api-docs)
-* 🧪 Unit tesztek (kliens- és szerveroldal)
-* 🐳 Docker és docker-compose használata
-* 🤖 CI/CD pipeline
-* ✅ ESLint és Prettier használata
+
+- 🐙 Git verziókezelő használata
+  - ✨ Conventional commit mesages
+- 🌐 HTTPS protokoll és REST elvek követése
+- 🪂 Production deployment
+- 📝 Jó minőségű dokumentáció
+  - JsDoc
+  - [Interakatív API doksi](https://2389-84-3-31-39.ngrok.io/api-docs)
+- 🧪 Unit tesztek (kliens- és szerveroldal)
+- 🐳 Docker és docker-compose használata
+- 🤖 CI/CD pipeline
+- ✅ ESLint és Prettier használata
 
 ## Tech stack
 
@@ -39,34 +40,35 @@ Elvárások szerint Typescript MERN-stack.
 ### Backend
 
 - [Boilerplate](https://www.npmjs.com/package/typescript-express-starter)
-	- MVC struktúra
-	- Dockerrel, ESLint+Prettierrel és Unit testinggel jön: csak személyre kell szabni
-	- dev és prod npm szkriptek működnek out of the box
+  - MVC struktúra
+  - Dockerrel, ESLint+Prettierrel és Unit testinggel jön: csak személyre kell szabni
+  - dev és prod npm szkriptek működnek out of the box
 - [Multer](https://www.npmjs.com/package/multer): fájlfeltöltés és tárolás
-
 
 ### Frontend
 
 - Create react app 'typescript' template
 - [Material UI](https://material-ui.com/): komponenskönyvtár, nem kell CSS-el annyit törődni
-	- [Album template](https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/album): kiindulási alap
+  - [Album template](https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/album): kiindulási alap
 
 ### CI/CD és szerver
 
 - CI/CD: Github actions: github felületén van, mások előre megírt actionjeivel (shimataro/ssh-key-action@v2) időt spórolok
 - VPS host:
-	1. Digital Ocean: weboldalamat és emailemet kiszolgáló Debian példány nem bírta el az `npm install` parancsot docker-compose-ban
-	2. Saját szerver: ..., így nekem kellett elővennem az otthoni médiaszerveremet
+  1.  Digital Ocean: weboldalamat és emailemet kiszolgáló Debian példány nem bírta el az `npm install` parancsot docker-compose-ban
+  2.  Saját szerver: ..., így nekem kellett elővennem az otthoni médiaszerveremet
 
 ## Használat
 
 ### Telepítés éles használatra
 
-(Dockerizáció folyamatban...)
+```shell
+docker-compose up
+```
 
 ### Fejlesztőkörnyezet előállítása (MongoDB a default porton fusson a háttérben)
 
- ``` shell
+```shell
 git clone https://github.com/pmihaly/limecrm
 cd limecrm
 # Szerveroldal beállítása
@@ -87,7 +89,6 @@ MongoDB manuális futtatása (mongohoz nincs OpenRC szolgáltatás)
 ```shell
 sudo /usr/bin/mongod --quiet --config /etc/mongodb.conf
 ```
-
 
 ## Fájlstruktúra
 
@@ -147,8 +148,8 @@ the Free Software Foundation, either version 3 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program. If not, see <http://www.gnu.org/licenses/>.
