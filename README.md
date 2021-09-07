@@ -63,6 +63,7 @@ Elvárások szerint Typescript MERN-stack.
 ### Telepítés éles használatra
 
 ```shell
+echo "PORT=3000" > .env
 docker-compose up
 ```
 
