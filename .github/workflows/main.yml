@@ -40,12 +40,14 @@ jobs:
       - name: 🚨 Run tests
         run: npm run test:ci
 
-      # TODO: Working docker-compose deployment and updating sercrets for new server
+      # Működik az alábbi deployment stratégia (lásd https://github.com/pmihaly/limecrm/commit/8cf150d6b4c09202f09dbb5582f39b15138e0289),
+      # de a digitalocean instancem 1G memóriája nem bírja a projektet,
+      # a személyes szerverem ssh-ét pedig nem szeretném a nagyvilág felé kinyitni, így oda manuálisan deployolok
       # - name: 🔑 Install SSH key
       #   uses: shimataro/ssh-key-action@v2
       #   with:
       #     key: ${{ secrets.SSH_KEY }}
       #     known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-      # - name: ♻ Recreate containers
-      #   run: ssh ${{ secrets.SSH_USER_AT_HOST }} "cd /var/www/limecrm && git pull && docker-compose up --force-recreate -d"
+      # - name: ♻ Rebuild containers
+      #   run: ssh ${{ secrets.SSH_USER_AT_HOST }} "cd /var/www/limecrm && git pull && docker-compose up --build -d"
