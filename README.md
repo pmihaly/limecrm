@@ -66,6 +66,11 @@ Elvárások szerint Typescript MERN-stack.
 docker-compose up
 ```
 
+Miután a `client` lebuildelte a react appot, bezárul.
+A `server` szolgáltatás a 3000-es porton fut, és kiszolgálja a lebuildelt frontendet.
+
+Következő lépés egy nginx reverse proxy beállítása.
+
 ### Fejlesztőkörnyezet előállítása (MongoDB a default porton fusson a háttérben)
 
 ```shell
