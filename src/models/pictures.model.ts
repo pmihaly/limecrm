@@ -20,8 +20,8 @@ const pictureSchema: Schema = new Schema({
     required: true,
   },
   uploadDate: {
-    type: String,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
   description: {
     type: String,

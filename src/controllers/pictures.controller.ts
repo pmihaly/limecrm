@@ -76,14 +76,11 @@ class PicturesController {
 
       const pictureDimensions: PictureDimensionsInterface = { width, height };
 
-      const uploadDate = new Date(Date.now()).toISOString();
-
       const pictureData: CreatePictureDto = {
         filename,
         filesize: size,
         pictureDimensions,
         uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-        uploadDate,
         description,
       };
 
@@ -122,7 +119,6 @@ class PicturesController {
         filesize: size,
         pictureDimensions,
         uploaderIp: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-        uploadDate: new Date(Date.now()).toISOString(),
         description,
       };
       const updatePictureData: Picture = await this.pictureService.updatePicture(pictureId, pictureData);

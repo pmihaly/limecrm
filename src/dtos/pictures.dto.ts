@@ -5,18 +5,18 @@ import { PictureDimensionsInterface } from '@/interfaces/pictureDimensions.inter
  * [D]ata [T]ransfer [O]bject = abstraction layer to not expose the Model directly
  *
  * @export
- * @class CreatePictureDto
+ * @interface CreatePictureDto
  */
 export class CreatePictureDto {
-  public filename: string;
+  filename: string;
 
-  public filesize: number;
+  filesize: number;
 
-  public pictureDimensions: PictureDimensionsInterface;
+  pictureDimensions: PictureDimensionsInterface;
 
-  public uploaderIp: string | string[];
+  uploaderIp: string | string[];
 
-  public uploadDate: string;
+  uploadDate?: string;
 
-  public description: string;
+  description: string;
 }
