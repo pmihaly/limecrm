@@ -1,18 +1,18 @@
 {
-    "env": "test",
-    "dbConfig": {
-        "host": "localhost",
-        "database": "mongoose",
-        "port": 27017
-    },
-    "secretKey": "secretKey",
-    "log": {
-        "format": "dev",
-        "dir": "../logs"
-    },
-    "cors": {
-        "origin": true,
-        "credentials": true
-    },
-    "uploads": "../../uploads"
+  "env": "test",
+  "dbConfig": {
+    "host": "localhost",
+    "database": "mongoose",
+    "port": 27017
+  },
+  "secretKey": "secretKey",
+  "log": {
+    "format": "dev",
+    "dir": "../logs"
+  },
+  "cors": {
+    "origin": true,
+    "credentials": true
+  },
+  "uploads": "/uploads"
 }
