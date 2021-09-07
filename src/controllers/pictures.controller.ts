@@ -78,8 +78,6 @@ class PicturesController {
 
       const uploadDate = new Date(Date.now()).toISOString();
 
-      console.log('uploadDate', uploadDate);
-
       const pictureData: CreatePictureDto = {
         filename,
         filesize: size,
@@ -108,8 +106,6 @@ class PicturesController {
   public updatePicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pictureId: string = req.params.id;
-
-      console.log(req.file);
 
       if (!req.file) {
         res.status(400).json({ message: "'picture': Picture needed" });
