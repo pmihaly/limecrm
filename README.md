@@ -22,7 +22,7 @@ LimeCRM egy képmegosztó szolgáltatás.
 ## Funkciók
 
 - 🐙 Git verziókezelő használata
-  - ✨ Conventional commit messages
+  - ✨ [Conventional commit messages](https://www.conventionalcommits.org/en/v1.0.0/)
 - 🌐 HTTPS protokoll és REST elvek követése
 - 🪂 Production deployment
 - 📝 Jó minőségű dokumentáció
