@@ -68,7 +68,7 @@ export default function App(props: IAppProps) {
   }
 
   function onPictureURLCopy(): void {
-    showSnackbar('Kép URL vágólapra másolva');
+    showSnackbar('Picture URL copied to clipboard');
   }
 
   useEffect(() => {
