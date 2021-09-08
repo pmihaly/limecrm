@@ -31,23 +31,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Teszteléshez meg lehet adni előre a kép objektumot
+ * Mivel a tesztkörnyezetben nem fut le a useEffect(),
+ * ezért nem írja felül az itt megadott defaultPictures-t.
+ *
+ * @export
+ * @interface IAppProps
+ */
 export interface IAppProps {
-  defaultPictures: PictureInterface[];
+  defaultPictures?: PictureInterface[] | any;
 }
 
 /**
- * Őskomponens
+ *  Őskomponens
  * Statejében tárolódnak a képek, amiket Context api-val kiszolgálunk a gyerekeknek
  * Tartalmaz egy appbart, a képek gridjét  (aminek első eleme a képfeltöltés gomb)
  * és egy alapból láthatatlan snackbart, ami kép URL másolás esetén visszajelzést ad a usernek
  *
  * @export
- * @return {React.Component}
+ * @param {IAppProps} props
+ * @return {*}
  */
 export default function App(props: IAppProps) {
   const classes = useStyles();
 
-  const [pictures, setPictures] = useState<PictureInterface[]>(props.defaultPictures);
+  const [pictures, setPictures] = useState<PictureInterface[]>(props.defaultPictures ? props.defaultPictures : []);
 
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<String>('');
