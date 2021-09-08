@@ -58,42 +58,45 @@ export default function PictureCard(props: IPictureCardProps) {
   const [cardSelected, setCardSelected] = useState(false);
 
   return (
-    <Grid item key={props.picture._id} xs={12} sm={6} md={4}>
-      <Card className={classes.card} onMouseEnter={() => setCardSelected(true)} onMouseLeave={() => setCardSelected(false)}>
-        <CardHeader
-          action={
-            <>
-              <IconButton
-                aria-label="copy picture url"
-                onClick={() => {
-                  navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`);
-                  props.onPictureURLCopy();
-                }}
-              >
-                <LinkIcon />
-              </IconButton>
-            </>
-          }
-        />
-        <a href={`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`} target="_blank" rel="noopener noreferrer">
-          <CardMedia className={classes.cardMedia} image={`/${props.picture.filename}`} title={props.picture.filename} />
-        </a>
-        {cardSelected && (
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-              <ul>
-                <li>Uploader Ip: {props.picture.uploaderIp}</li>
-                <li>Upload date: {new Date(props.picture.uploadDate).toLocaleDateString()}</li>
-                <li>
-                  Image res: {props.picture.pictureDimensions.width}x{props.picture.pictureDimensions.height}
-                </li>
-                <li>File size: {fileSize(props.picture.filesize)}</li>
-              </ul>
-            </Typography>
-            <Typography>{props.picture.description}</Typography>
-          </CardContent>
-        )}
-      </Card>
-    </Grid>
+    <Card className={classes.card} onMouseEnter={() => setCardSelected(true)} onMouseLeave={() => setCardSelected(false)}>
+      <CardHeader
+        action={
+          <>
+            <IconButton
+              aria-label="copy picture url"
+              onClick={() => {
+                navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`);
+                props.onPictureURLCopy();
+              }}
+            >
+              <LinkIcon />
+            </IconButton>
+          </>
+        }
+      />
+      <a
+        href={`${process.env.REACT_APP_API_URL || window.location.href}${props.picture.filename}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-testid="pictureLink"
+      >
+        <CardMedia className={classes.cardMedia} image={`/${props.picture.filename}`} title={props.picture.filename} data-testid="picture" />
+      </a>
+      {cardSelected && (
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            <ul>
+              <li>Uploader Ip: {props.picture.uploaderIp}</li>
+              <li>Upload date: {new Date(props.picture.uploadDate).toLocaleDateString()}</li>
+              <li>
+                Image res: {props.picture.pictureDimensions.width}x{props.picture.pictureDimensions.height}
+              </li>
+              <li>File size: {fileSize(props.picture.filesize)}</li>
+            </ul>
+          </Typography>
+          <Typography>{props.picture.description}</Typography>
+        </CardContent>
+      )}
+    </Card>
   );
 }

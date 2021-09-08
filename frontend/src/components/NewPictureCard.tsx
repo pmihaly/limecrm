@@ -42,15 +42,13 @@ export default function NewPictureCard(props: INewPictureCardProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <Grid item key={0} xs={12} sm={6} md={4}>
-      <Card className={classes.card}>
-        <CardContent className={classes.cardContent}>
-          <Button startIcon={<AddIcon />} className={classes.addPictureButton} onClick={() => setDialogOpen(true)}>
-            Upload a picture
-          </Button>
-          <NewPictureDialog open={dialogOpen} onDialogClose={() => setDialogOpen(false)}></NewPictureDialog>
-        </CardContent>
-      </Card>
-    </Grid>
+    <Card className={classes.card}>
+      <CardContent className={classes.cardContent}>
+        <Button startIcon={<AddIcon />} className={classes.addPictureButton} onClick={() => setDialogOpen(true)} id="uploadPictureDialogOpen">
+          Upload a picture
+        </Button>
+        <NewPictureDialog open={dialogOpen} onDialogClose={() => setDialogOpen(false)}></NewPictureDialog>
+      </CardContent>
+    </Card>
   );
 }

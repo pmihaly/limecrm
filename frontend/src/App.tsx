@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+export interface IAppProps {
+  defaultPictures: PictureInterface[];
+}
+
 /**
  * Őskomponens
  * Statejében tárolódnak a képek, amiket Context api-val kiszolgálunk a gyerekeknek
@@ -40,10 +44,10 @@ const useStyles = makeStyles(theme => ({
  * @export
  * @return {React.Component}
  */
-export default function App() {
+export default function App(props: IAppProps) {
   const classes = useStyles();
 
-  const [pictures, setPictures] = useState<PictureInterface[]>([]);
+  const [pictures, setPictures] = useState<PictureInterface[]>(props.defaultPictures);
 
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<String>('');
@@ -89,10 +93,14 @@ export default function App() {
               </React.Fragment>
             }
           />
-          <Grid container spacing={4} alignItems="flex-start">
-            <NewPictureCard></NewPictureCard>
+          <Grid container spacing={4} alignItems="flex-start" data-testid="picturesGrid">
+            <Grid item key={'null'} xs={12} sm={6} md={4} data-testid="newPicturesCard">
+              <NewPictureCard></NewPictureCard>
+            </Grid>
             {pictures.map(picture => (
-              <PictureCard picture={picture} onPictureURLCopy={onPictureURLCopy}></PictureCard>
+              <Grid item key={picture._id} xs={12} sm={6} md={4} data-testid="picturesCard">
+                <PictureCard picture={picture} onPictureURLCopy={onPictureURLCopy}></PictureCard>
+              </Grid>
             ))}
           </Grid>
         </Container>

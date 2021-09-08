@@ -47,7 +47,7 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
     <Dialog open={props.open} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Uploading picture</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        <DialogContentText data-testid="terms">
           By uploading an image, you accept our <a href="/">Terms</a>
         </DialogContentText>
         <TextField autoFocus margin="dense" label="Picture description" rows={4} fullWidth multiline onChange={e => setDescription(e.target.value)} />
@@ -65,9 +65,17 @@ export default function NewPictureDialog(props: INewPictureDialogProps) {
               setPicture(targetFiles[0]);
             }
           }}
+          data-testid="pictureInput"
         />
         <label htmlFor="contained-button-file">
-          <Button className={classes.button} variant="contained" color="primary" component="span" startIcon={<PhotoCamera />}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            component="span"
+            startIcon={<PhotoCamera />}
+            data-testid="pictureButton"
+          >
             Add image
           </Button>
         </label>
