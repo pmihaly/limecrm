@@ -1,11 +1,10 @@
 import { makeStyles } from '@material-ui/core';
-import CardContent from '@material-ui/core/CardContent';
-import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import AddIcon from '@material-ui/icons/Add';
-import Grid from '@material-ui/core/Grid';
-import NewPictureDialog from './NewPictureDialog';
 import { useState } from 'react';
+import NewPictureDialog from './NewPictureDialog';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -34,7 +33,7 @@ export interface INewPictureCardProps {}
  *
  * @export
  * @param {INewPictureCardProps} props
- * @return {React.Component}
+ * @return {JSX.Element}
  */
 export default function NewPictureCard(props: INewPictureCardProps) {
   const classes = useStyles();

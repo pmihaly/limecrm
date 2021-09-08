@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+
 import PictureInterface from '../interfaces/PictureInterface';
 
 export type PicturesContextType = {

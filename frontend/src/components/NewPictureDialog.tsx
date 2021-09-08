@@ -1,13 +1,14 @@
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { useRef, useState } from 'react';
+
 import { usePictures } from '../context/PicturesContext';
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +32,7 @@ export interface INewPictureDialogProps {
  *
  * @export
  * @param {INewPictureDialogProps} props
- * @return {React.Component}
+ * @return {JSX.Element}
  */
 export default function NewPictureDialog(props: INewPictureDialogProps) {
   const classes = useStyles();
