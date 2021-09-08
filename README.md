@@ -120,25 +120,30 @@ src/services
 └── pictures.service.ts
 src/tests
 ├── fixtures
-│   └── picture.jpg
+│   └── picture.jpg
 ├── index.test.ts
 └── pictures.test.ts
 frontend/src/
-├── App.test.tsx
 ├── App.tsx
 ├── components
-│   ├── NewPictureCard.tsx
-│   ├── NewPictureDialog.tsx
-│   └── PictureCard.tsx
+│   ├── NewPictureCard.tsx
+│   ├── NewPictureDialog.tsx
+│   └── PictureCard.tsx
 ├── context
-│   └── PicturesContext.ts
+│   └── PicturesContext.ts
 ├── index.tsx
 ├── interfaces
-│   └── PictureInterface.ts
+│   └── PictureInterface.ts
 ├── logo.svg
 ├── react-app-env.d.ts
 ├── reportWebVitals.ts
-└── setupTests.ts
+├── setupTests.ts
+└── tests
+    ├── appRenderer.tsx
+    ├── App.test.tsx
+    └── components
+        ├── NewPictureCard.test.tsx
+        └── PictureCard.test.tsx
 
 ```
 
