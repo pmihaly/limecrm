@@ -1,16 +1,17 @@
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import React, { useEffect, useState } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
-import PictureCard from './components/PictureCard';
+
 import NewPictureCard from './components/NewPictureCard';
+import PictureCard from './components/PictureCard';
 import { PicturesContext } from './context/PicturesContext';
 import PictureInterface from './interfaces/PictureInterface';
 
@@ -51,7 +52,7 @@ export interface IAppProps {
  *
  * @export
  * @param {IAppProps} props
- * @return {*}
+ * @return {JSX.Element}
  */
 export default function App(props: IAppProps) {
   const classes = useStyles();

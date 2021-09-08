@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+
 import appRenderer, { testPictures } from '../appRenderer';
 
 describe('<PictureCard />', () => {
